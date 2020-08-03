@@ -1,13 +1,14 @@
 plugins {
     java
+    application
 }
 
 buildscript {
-    val props = java.util.Properties()
-    File("../../gradle.properties").inputStream().buffered().use {
-        props.load(it)
-    }
-    val kotlinVersion = props["bootstrap.kotlin.default.version"]!!
+//    val props = java.util.Properties()
+//    File("../../gradle.properties").inputStream().buffered().use {
+//        props.load(it)
+//    }
+    val kotlinVersion = "1.4.20-dev-2975" //props["bootstrap.kotlin.default.version"]!!
     extra["kotlinVersion"] = kotlinVersion
 
     repositories {
@@ -37,4 +38,17 @@ dependencies {
     implementation("org.gradle:gradle-tooling-api:$toolingApiVersion")
     // The tooling API need an SLF4J implementation available at runtime, replace this with any other implementation
     runtimeOnly("org.slf4j:slf4j-simple:1.7.10")
+}
+
+application {}
+
+tasks.getByName("run", JavaExec::class) {
+    workingDir = File("../../")
+    main = "RunAllBenchmarksKt"
+}
+
+tasks.register("runFast", JavaExec::class) {
+    classpath = sourceSets.main.get().runtimeClasspath
+    workingDir = File("../../")
+    main = "RunFastBenchmarksKt"
 }
