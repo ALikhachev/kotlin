@@ -40,11 +40,12 @@ dependencies {
     runtimeOnly("org.slf4j:slf4j-simple:1.7.10")
 }
 
-application {}
+application {
+    mainClassName = "RunAllBenchmarksKt"
+}
 
 tasks.getByName("run", JavaExec::class) {
     workingDir = File("../../")
-    main = "RunAllBenchmarksKt"
 }
 
 tasks.register("runFast", JavaExec::class) {
