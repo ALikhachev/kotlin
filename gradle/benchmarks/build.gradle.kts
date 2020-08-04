@@ -8,7 +8,7 @@ buildscript {
 //    File("../../gradle.properties").inputStream().buffered().use {
 //        props.load(it)
 //    }
-    val kotlinVersion = "1.4.20-dev-2975" //props["bootstrap.kotlin.default.version"]!!
+    val kotlinVersion = System.getenv("BOOTSTRAP_VERSION") ?: "1.4.255-SNAPSHOT" //props["bootstrap.kotlin.default.version"]!!
     extra["kotlinVersion"] = kotlinVersion
 
     repositories {
